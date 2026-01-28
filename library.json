@@ -1,0 +1,32 @@
+{
+    "name": "BQ25890",
+    "version": "1.0.0",
+    "description": "Arduino driver library for Texas Instruments BQ25890 I2C battery charger IC",
+    "keywords": [
+        "battery",
+        "charger",
+        "lipo",
+        "li-ion",
+        "bq25890",
+        "i2c",
+        "power",
+        "usb",
+        "otg"
+    ],
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "authors": [
+        {
+            "name": "Joshua Russell-Hobson",
+            "email": "josh@the-root.co.uk"
+        }
+    ],
+    "license": "MIT",
+    "frameworks": ["arduino"],
+    "platforms": ["*"],
+    "dependencies": {
+        "Wire": "*"
+    }
+}
