@@ -1,6 +1,6 @@
 {
     "name": "BQ25890",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "Arduino driver library for Texas Instruments BQ25890 I2C battery charger IC",
     "keywords": [
         "battery",
