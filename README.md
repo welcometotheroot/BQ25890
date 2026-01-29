@@ -1,5 +1,7 @@
 # BQ25890 Arduino Driver
 
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/welcometotheroot/library/BQ25890.svg)](https://registry.platformio.org/libraries/welcometotheroot/BQ25890)
+
 Arduino-compatible I2C driver library for the [Texas Instruments BQ25890](https://www.ti.com/product/BQ25890) battery charger IC.
 
 > **Note:** This library has only been tested with the **stm32duino** (STM32 Arduino) framework. It should work with other Arduino-compatible platforms that provide the standard `Wire` library, but this has not been verified.
