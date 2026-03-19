@@ -13,11 +13,16 @@ Arduino-compatible I2C driver library for the [Texas Instruments BQ25890](https:
 - Type-safe enums for multi-value settings
 - Blocking and non-blocking (async) ADC conversion
 - Continuous ADC mode support
-- Fault detection and reporting
-- OTG (boost) mode control
-- Ship mode (BATFET disconnect)
-- HVDCP current pulse control
+- Fault detection and reporting with human-readable strings
+- OTG (boost) mode control with configurable voltage and current
+- Ship mode (BATFET disconnect) with configurable delay and reset
+- Precharge, termination, and fast-charge current control
+- IR compensation and thermal regulation
+- VINDPM (absolute and relative) input voltage management
+- HVDCP current pulse control for voltage negotiation
+- JEITA temperature-aware charging profiles
 - Input Current Optimizer (ICO) support
+- DPM status monitoring (VINDPM/IINDPM)
 - Wire instance injection for multi-bus configurations
 
 ## Hardware
@@ -82,17 +87,22 @@ lib/bq25890/
 
 | Category | Functions |
 |---|---|
-| Initialization | `begin()`, `isConnected()`, `reset()` |
-| Input Control | `setInputCurrentLimit()`, `setHIZMode()` |
-| Charging | `setChargeEnabled()`, `setChargeVoltage()`, `setFastChargeCurrent()` |
-| ADC | `startADCConversion()`, `startADCConversionAsync()`, `setADCContinuousMode()` |
-| Readings | `getBatteryVoltage()`, `getVBUSVoltage()`, `getChargeCurrent()`, `getSystemVoltage()` |
-| Status | `getChargeStatus()`, `getVBUSStatus()`, `isPowerGood()` |
-| Faults | `readFaults()`, `getChargeFault()`, `getNTCFault()` |
-| OTG Boost | `setOTGEnabled()`, `setBoostVoltage()`, `setBoostCurrentLimit()` |
+| Initialization | `begin()`, `isConnected()`, `reset()`, `getDeviceID()`, `getDeviceRevision()` |
+| Input Control | `setInputCurrentLimit()`, `setHIZMode()`, `setILIMPinEnabled()` |
+| Charging | `setChargeEnabled()`, `setChargeVoltage()`, `setFastChargeCurrent()`, `setMinSystemVoltage()` |
+| Precharge / Term | `setPrechargeCurrent()`, `setTerminationCurrent()`, `setTerminationEnabled()` |
+| ADC | `startADCConversion()`, `startADCConversionAsync()`, `isADCConversionComplete()`, `setADCContinuousMode()` |
+| Readings | `getBatteryVoltage()`, `getVBUSVoltage()`, `getChargeCurrent()`, `getSystemVoltage()`, `getTSPercent()` |
+| Status | `getChargeStatus()`, `getVBUSStatus()`, `isPowerGood()`, `getChargeStatusString()`, `getVBUSStatusString()` |
+| Faults | `readFaults()`, `getChargeFault()`, `getNTCFault()`, `isWatchdogFault()`, `isBoostFault()`, `isBatteryFault()` |
+| OTG Boost | `setOTGEnabled()`, `setBoostVoltage()`, `setBoostCurrentLimit()`, `setBoostHotThreshold()`, `setBoostColdThreshold()` |
 | Ship Mode | `setBATFETDisabled()`, `setBATFETDelay()`, `setBATFETResetEnabled()` |
-| Timers | `setWatchdogTimer()`, `resetWatchdog()`, `setSafetyTimerEnabled()` |
+| Timers | `setWatchdogTimer()`, `resetWatchdog()`, `setSafetyTimerEnabled()`, `setFastChargeTimer()` |
+| IR Compensation | `setIRCompResistance()`, `setIRCompVoltageClamp()`, `setThermalRegThreshold()` |
+| VINDPM | `setForceVINDPM()`, `setVINDPMThreshold()`, `setVINDPMOffset()`, `isVINDPMActive()` |
+| HVDCP Pulse | `pumpVoltageUp()`, `pumpVoltageDown()`, `setCurrentPulseControlEnabled()` |
 | ICO | `setICOEnabled()`, `forceICO()`, `isICOOptimized()`, `getIDPMLimit()` |
+| JEITA | `setJEITALowTempCurrent()`, `setJEITAHighTempVoltage()`, `setBatteryLowVThreshold()`, `setRechargeThreshold()` |
 
 See [BQ25890.h](src/BQ25890.h) for full API documentation.
 
